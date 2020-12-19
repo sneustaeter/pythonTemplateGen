@@ -1,25 +1,24 @@
-#!/usr/bin/python3
-#Date: April 12, 2020
-#File: templateGen.py
-#Author: Saxon Neustaeter
+#!/usr/bin/python3.8
+# pyTemplateGen.py
+# Author: Saxon Neustaeter
+# Date: 12/18/2020
+# Description: Simple script to produce a template file for a new python project
 import os
-from datetime import date
-
-today = date.today()
-createDate = today.strftime("%B %d, %Y")
-
+import datetime
 os.system("clear")
 
-print("Welcome to the Python template generator!\n")
-fileName = input("Enter the name of the file to be generated WITHOUT an extention: ")
-fileName += ".py"
+# Path to Executable
+shebang = "#!/usr/bin/python3.8"
 
-author = input("Enter the authors name: ")
+# Collect Information about File, etc.
+filename = input("What is the filename without extension: ")
+filename += ".py"
+author = input("What is the authors name: ")
+desc = input("Enter a breif description of the project: ")
 
-fileContents = ('#!/usr/bin/python3', '#Date: ' + createDate ,'#File: ' + fileName, '#Author: ' + author , 'import os')
+# Get and format date
+today = datetime.datetime.now()
+today = (today.strftime("%m/%d/%Y"))
 
-with open(fileName, 'w') as outfile:
-	index = 0
-	for index in range(0,len(fileContents),1):
-		outfile.write(fileContents[index])
-		outfile.write("\n")
+with open(filename, 'w') as outfile:
+	outfile.write(shebang + "\n# " + filename + "\n# Author: " + author + "\n# Date: " + today + "\n# Description: " + desc + "\nimport os\nos.system(\"clear\")\n")
